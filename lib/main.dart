@@ -7,6 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -22,17 +23,39 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _player1 = 0;
+  int _player2 = 0;
 
-  void _incrementCounter() {
+  void _incrementPlayer1() {
     setState(() {
-      _counter++;
+      _player1++;
+    });
+  }
+  void _incrementPlayer2() {
+    setState(() {
+      _player2++;
     });
   }
 
-  void _decrementCounter(){
+  void _reset()
+  {
     setState(() {
-      _counter--;
+      _player1 = 0;
+      _player2 = 0;
+    });
+  }
+
+
+  void _decrementPlayer1(){
+    setState(() {
+      _player1--;
+    });
+  }
+
+
+  void _decrementPlayer2(){
+    setState(() {
+      _player2--;
     });
   }
 
@@ -48,42 +71,115 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Count',
-              style: TextStyle(fontWeight:FontWeight.bold,color: Colors.red,fontSize: 30.0),
+            Row(
+              children: <Widget>[
+                SizedBox(
+                  width: 40.0,
+                ),
+                Text(
+                  'Player 1',
+                  style: TextStyle(fontWeight:FontWeight.bold,color: Colors.red,fontSize: 30.0),
+                ),
+                SizedBox(
+                  width: 80.0,
+                ),
+                Text(
+                  'Player 2',
+                  style: TextStyle(fontWeight:FontWeight.bold,color: Colors.red,fontSize: 30.0),
+                ),
+              ],
             ),
             SizedBox(
               height: 10.0,
             ),
-            Text(
-              '$_counter',
-              style: TextStyle(fontSize: 40.0),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SizedBox(
+                  width: 20.0,
+                ),
+                Text(
+                  '$_player1',
+                  style: TextStyle(fontSize: 40.0),
+                ),
+                SizedBox(
+                  width: 60.0,
+                ),
+                Text(
+                  '$_player2',
+                  style: TextStyle(fontSize: 40.0),
+                ),
+                SizedBox(
+                  width: 20.0,
+                ),
+              ],
             ),
+            /*Text(
+              '$_player1',
+              style: TextStyle(fontSize: 40.0),
+            ),*/
             SizedBox(
               height: 80.0,
             ),
-            ButtonTheme(
-              child: RaisedButton(
-                onPressed: _incrementCounter,
-                child: Text("Increment"),
-              ),
-              height: 50.0,
-              minWidth: 30.0,
-              buttonColor: Colors.grey[400],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                ButtonTheme(
+                  child: RaisedButton(
+                    onPressed: _incrementPlayer1,
+                    child: Text("Point"),
+                  ),
+                  height: 50.0,
+                  minWidth: 30.0,
+                  buttonColor: Colors.grey[400],
+                ),
+                ButtonTheme(
+                  child: RaisedButton(
+                    onPressed: _incrementPlayer2,
+                    child: Text("Point"),
+                  ),
+                  height: 50.0,
+                  minWidth: 30.0,
+                  buttonColor: Colors.grey[400],
+                ),
+              ],
             ),
             SizedBox(
               height: 30.0,
             ),
-            ButtonTheme(
-              child: RaisedButton(
-                onPressed: _decrementCounter,
-                child: Text("Decrement")
-              ),
-              height: 50.0,
-              minWidth: 30.0,
-              buttonColor: Colors.grey[400],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                ButtonTheme(
+                  child: RaisedButton(
+                    onPressed: _decrementPlayer1,
+                    child: Text("Reduce")
+                  ),
+                  height: 50.0,
+                  minWidth: 30.0,
+                  buttonColor: Colors.grey[400],
+                ),
+                ButtonTheme(
+                  child: RaisedButton(
+                      onPressed: _decrementPlayer2,
+                      child: Text("Reduce")
+                  ),
+                  height: 50.0,
+                  minWidth: 30.0,
+                  buttonColor: Colors.grey[400],
+                ),
+              ],
+            )
+            ,SizedBox(
+             height: 40.0,
+            )
+            ,RaisedButton(
+              child: Text("Reset"),
+              onPressed: _reset,
             )
           ],
+
         ),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
